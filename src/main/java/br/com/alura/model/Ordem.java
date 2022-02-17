@@ -2,6 +2,7 @@ package br.com.alura.model;
 
 import lombok.*;
 
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
 import java.util.Date;
 
@@ -19,4 +20,11 @@ public class Ordem {
     private String status;
     @Column(name = "user_id")
     private Integer userId;
+
+    @JsonbTransient
+    public Integer getId() {return id;}
+
+    @JsonbTransient
+    public Integer getUserId() {return userId;}
+
 }

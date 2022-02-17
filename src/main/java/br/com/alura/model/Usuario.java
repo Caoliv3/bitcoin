@@ -3,8 +3,8 @@ package br.com.alura.model;
 import io.quarkus.elytron.security.common.BcryptUtil;
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import io.quarkus.security.jpa.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
+
 
 import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.Entity;
@@ -12,8 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-@Getter
-@Setter
+@Data
 @Entity
 @UserDefinition
 public class Usuario extends PanacheEntityBase {
@@ -34,6 +33,8 @@ public class Usuario extends PanacheEntityBase {
     public String getPassword() {
         return password;
     }
+    @JsonbTransient
+    public Integer getId() {return id;}
 
     public static void incluir(Usuario usuario){
         usuario.password = BcryptUtil.bcryptHash(usuario.password);
